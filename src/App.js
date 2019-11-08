@@ -1,25 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import Footer from "./components/footer";
+import AdBootom from "./components/ad_bottom";
+import Search from "./components/search";
+import Header from "./components/header";
+import Logo from "./components/header/logo";
+import Navigation from "./components/header/nav";
+import NavButtons from "./components/header/buttons";
+import NavCart from "./components/header/cart";
+import NavSochial from "./components/header/soch";
+
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+	  <React.Fragment>
+		  <Search />
+		    <div className="main-content-wrapper d-flex clearfix">
+				  <Header>
+					  <Logo/>
+					  <Navigation/>
+					  <NavButtons/>
+					  <NavCart/>
+					  <NavSochial/>
+				  </Header>
+			    { props.children }
+		    </div>
+		  <AdBootom />
+		  <Footer />
+	  </React.Fragment>
   );
 }
 
