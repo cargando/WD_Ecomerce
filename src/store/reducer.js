@@ -54,7 +54,7 @@ const initialState = {
 const rootReducer = createReducer({
 	[actions.updateCart]: (state, payload) => ({ ...state, cart: payload}),
 	[actions.deleteItemFromCart]: (state, payload) => {
-		const filtered = state.cart.filter( item => item.id != payload.id);
+		const filtered = state.cart.filter( item => item.id.toString() !== payload.id.toString());
 
 		return {
 			...state,
@@ -62,7 +62,7 @@ const rootReducer = createReducer({
 		}
 	},
 	[actions.updateCartCounter]: (state, payload) => {
-		const filtered = state.cart.filter( item => item.id == payload.id);
+		const filtered = state.cart.filter( item => item.id.toString() === payload.id.toString());
 		if (!filtered.length || filtered.length > 1) {
 			console.log("Cart Reducer: shit on me");
 			return state;

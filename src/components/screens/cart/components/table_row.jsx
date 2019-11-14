@@ -1,15 +1,16 @@
 import React from "react";
 import * as PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
 import Counter from "../../../product_counter";
+import * as URL from '../../../../router/url';
 
 function Row({id, title, img, price, cnt, max}) {
-	console.log("cartData", cnt, title);
 	// const Image = img.small;
 
 	return (
 		<tr key={ id }>
 			<td className="cart_product_img">
-				<a href="#"><img src={ img.small } alt="Product" /></a>
+				<Link to={`${ URL.PROD_DETAILS }/${id}`}><img src={ img.small } alt="Product" /></Link>
 			</td>
 			<td className="cart_product_desc">
 				<h5>{ title }</h5>

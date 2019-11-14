@@ -4,9 +4,12 @@ import Row from "./table_row";
 function CartTable(props) {
 	const { data = []} = props;
 
-	const visibility = props.show ? "block" : "none";
 	return (
-		<table className="table table-responsive" tabIndex="1" style={{overflow: "hidden", outline: "none"}}>
+		<table
+			className="table table-responsive"
+			tabIndex="1"
+			style={{overflow: "hidden", outline: "none"}}
+		>
 			<thead>
 			<tr>
 				<th></th>

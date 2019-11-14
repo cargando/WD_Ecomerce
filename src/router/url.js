@@ -4,7 +4,8 @@ export const CART = '/cart';
 export const PRODUCTS = '/product';
 export const PRODUCTS_BED = `${ PRODUCTS }/beds`;
 export const PRODUCTS_DOOR = `${ PRODUCTS }/doors`;
-export const PROD_DETAILS = '/product/view/:code';
+export const PROD_DETAILS = '/product/view';
+export const PROD_DETAILS_C = '/product/view/:code';
 export const CHECKOUT = '/checkout';
 
 export const NAVIGATION = [

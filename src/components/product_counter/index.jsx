@@ -2,6 +2,8 @@ import React from "react";
 import * as PropTypes from "prop-types";
 import { useDispatch } from 'react-redux';
 import { updateCartCounter, deleteItemFromCart } from '../../store/actions';
+
+
 // function Counter(props) {
 const Counter = (props) => {
 
@@ -27,8 +29,15 @@ const Counter = (props) => {
 	};
 
 	const handleChange = (e) => {
-		const value = e.target.value;
+		const re = /\D+/gi;
+		let value = +e.target.value.replace(re, '');
 
+		const action = value <= 0 ? deleteItemFromCart : updateCartCounter;
+
+		dispatcher({
+			type: action.getType(),
+			payload: {id, cnt: value},
+		});
 	};
 
 
@@ -51,7 +60,7 @@ const Counter = (props) => {
 						max="300"
 						name="quantity"
 						value={ cnt }
-						onChange={ () => null }
+						onChange={ handleChange }
 					/>
 					<span
 						className="qty-plus"
@@ -62,6 +71,12 @@ const Counter = (props) => {
 			</div>
 		</td>
 	);
+};
+
+Counter.propTypes = {
+	id: PropTypes.number,
+	cnt: PropTypes.number,
+	max: PropTypes.number,
 };
 
 export default Counter;
