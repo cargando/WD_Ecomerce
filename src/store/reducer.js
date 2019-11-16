@@ -50,10 +50,14 @@ const initialState = {
 	isSearchOpen: false,
 	favorite: {},
 	categories: [],
+	brands: [],
+	colors: [],
 };
 
 const rootReducer = createReducer({
 	[actions.updateCategory]: (state, payload) => ({ ...state, categories: payload}),
+	[actions.updateBrands]: (state, payload) => ({ ...state, brands: payload}),
+	[actions.updateColors]: (state, payload) => ({ ...state, colors: payload}),
 	[actions.updateGoods]: (state, payload) => ({ ...state, goods: payload}),
 	[actions.updateCart]: (state, payload) => ({ ...state, cart: payload}),
 	[actions.deleteItemFromCart]: (state, payload) => {
