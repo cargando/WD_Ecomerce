@@ -49,9 +49,12 @@ const initialState = {
 	cart: dataStub,
 	isSearchOpen: false,
 	favorite: {},
+	categories: [],
 };
 
 const rootReducer = createReducer({
+	[actions.updateCategory]: (state, payload) => ({ ...state, categories: payload}),
+	[actions.updateGoods]: (state, payload) => ({ ...state, goods: payload}),
 	[actions.updateCart]: (state, payload) => ({ ...state, cart: payload}),
 	[actions.deleteItemFromCart]: (state, payload) => {
 		const filtered = state.cart.filter( item => item.id.toString() !== payload.id.toString());
