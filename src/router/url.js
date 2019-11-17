@@ -1,11 +1,10 @@
 export const HOME = '/';
 export const SHOP = '/shop';
+export const SHOP_C = `${ SHOP }/:code`;
 export const CART = '/cart';
 export const PRODUCTS = '/product';
-export const PRODUCTS_BED = `${ PRODUCTS }/beds`;
-export const PRODUCTS_DOOR = `${ PRODUCTS }/doors`;
 export const PROD_DETAILS = '/product/view';
-export const PROD_DETAILS_C = '/product/view/:code';
+export const PROD_DETAILS_C = `${ PROD_DETAILS }/:code`;
 export const CHECKOUT = '/checkout';
 
 export const NAVIGATION = [
@@ -23,18 +22,6 @@ export const NAVIGATION = [
 		title: 'product',
 		url: PRODUCTS,
 		home: true,
-		children: [
-			{
-				title: 'bed',
-				url: PRODUCTS_BED,
-				home: true,
-			},
-			{
-				title: 'doors',
-				url: PRODUCTS_DOOR,
-				home: true,
-			}
-		]
 	},
 	{
 		title: 'cart',

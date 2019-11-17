@@ -13,6 +13,7 @@ export default (
 	<Switch>
 		<Route exact path="/" component={Home} />
 		<Route exact path={ URL.SHOP } component={Shop} />
+		<Route exact path={ URL.SHOP_C } component={Shop} />
 		<Route exact path={ URL.CART } component={Cart} />
 		<Route exact path={ URL.PROD_DETAILS_C } component={Home} />
 	</Switch>);

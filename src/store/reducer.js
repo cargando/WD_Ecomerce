@@ -45,28 +45,32 @@ const dataStub = [
 ];
 
 const initialState = {
-	goods: [],
+	goods: {},
 	cart: dataStub,
 	isSearchOpen: false,
 	favorite: {},
 	categories: [],
 	brands: [],
 	colors: [],
+	ranges: [],
+	filters: {
+		brand: {},
+		color: {},
+		price: {},
+	}
 };
 
 const rootReducer = createReducer({
+	[actions.updateFilter]: (state, payload) => ({ ...state, filters: { ...state.filters, ...payload }}),
 	[actions.updateCategory]: (state, payload) => ({ ...state, categories: payload}),
 	[actions.updateBrands]: (state, payload) => ({ ...state, brands: payload}),
+	[actions.updateRanges]: (state, payload) => ({ ...state, ranges: payload}),
 	[actions.updateColors]: (state, payload) => ({ ...state, colors: payload}),
 	[actions.updateGoods]: (state, payload) => ({ ...state, goods: payload}),
 	[actions.updateCart]: (state, payload) => ({ ...state, cart: payload}),
 	[actions.deleteItemFromCart]: (state, payload) => {
 		const filtered = state.cart.filter( item => item.id.toString() !== payload.id.toString());
-
-		return {
-			...state,
-			cart: filtered,
-		}
+		return { ...state, cart: filtered }
 	},
 	[actions.updateCartCounter]: (state, payload) => {
 		const filtered = state.cart.filter( item => item.id.toString() === payload.id.toString());

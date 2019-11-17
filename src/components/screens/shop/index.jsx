@@ -2,10 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router';
 import { useFetch } from '../../../components/hooks';
-import { updateCategory, updateBrands, updateColors } from '../../../store/actions';
+import * as Act from '../../../store/actions';
 import Filters from './components/filters';
+import 	{ Header, Products } from "./components";
 
 function Shop(props) {
+	const catalog = useFetch('http://test-api.ipromote.ru/API/CATALOG/FIND');
+	const ranges = useFetch('http://test-api.ipromote.ru/API/CATALOG/RANGE');
 	const category = useFetch('http://test-api.ipromote.ru/API/CATEGORY/FIND');
 	const brands = useFetch('http://test-api.ipromote.ru/API/BRAND/FIND');
 	const colors = useFetch('http://test-api.ipromote.ru/API/COLOR/FIND');
@@ -15,49 +18,51 @@ function Shop(props) {
 
 	useEffect(()=>{
 		dispatcher({
-			type: updateCategory.getType(),
-			payload: {
-				response: category.response,
-				error: category.error,
-				isLoading: category.isLoading
-			},
+			type: Act.updateGoods.getType(),
+			payload: { ...catalog },
+		});
+	}, [catalog.response, catalog.error, catalog.isLoading]);
+
+	useEffect(()=>{
+		dispatcher({
+			type: Act.updateCategory.getType(),
+			payload: { ...category },
 		});
 	}, [category.response, category.error, category.isLoading]);
 
 	useEffect(()=>{
 		dispatcher({
-			type: updateBrands.getType(),
-			payload: {
-				response: brands.response,
-				error: brands.error,
-				isLoading: brands.isLoading
-			},
+			type: Act.updateBrands.getType(),
+			payload: { ...brands },
 		});
 	}, [brands.response, brands.error, brands.isLoading]);
 
 	useEffect(()=>{
 		dispatcher({
-			type: updateColors.getType(),
-			payload: {
-				response: colors.response,
-				error: colors.error,
-				isLoading: colors.isLoading
-			},
+			type: Act.updateColors.getType(),
+			payload: { ...colors },
 		});
 	}, [colors.response, colors.error, colors.isLoading]);
+
+	useEffect(()=>{
+		dispatcher({
+			type: Act.updateRanges.getType(),
+			payload: { ...ranges },
+		});
+	}, [ranges.response, ranges.error, ranges.isLoading]);
 
 
 
 
 	return (
 		<React.Fragment>
-			<Filters
-				activeBrand={ activeBrand }
-				categoryList={ category.response.data || []}
-				brandList={ brands.response.data || []}
-				colorList={ colors.response.data || []}
-			/>
-			<h1>Shop</h1>
+			<Filters />
+			<div className="amado_product_area section-padding-100">
+				<div className="container-fluid">
+					<Header />
+					<Products />
+				</div>
+			</div>
 		</React.Fragment>
 	)
 

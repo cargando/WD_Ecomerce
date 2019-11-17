@@ -1,4 +1,5 @@
 import React from 'react';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 import Footer from "./components/footer";
 import AdBootom from "./components/ad_bottom";
