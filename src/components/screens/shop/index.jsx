@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { useFetch } from '../../../components/hooks';
 import * as Act from '../../../store/actions';
 import Filters from './components/filters';
-import 	{ Header, Products } from "./components";
+import { Header, Products } from "./components";
 
 function Shop(props) {
 	const catalog = useFetch('http://test-api.ipromote.ru/API/CATALOG/FIND');
@@ -13,7 +13,7 @@ function Shop(props) {
 	const brands = useFetch('http://test-api.ipromote.ru/API/BRAND/FIND');
 	const colors = useFetch('http://test-api.ipromote.ru/API/COLOR/FIND');
 	const dispatcher = useDispatch();
-
+console.log("catalog == ", catalog);
 	const { code: activeBrand } = props.match.params;
 
 	useEffect(()=>{
