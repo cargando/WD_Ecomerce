@@ -8,6 +8,9 @@ import { ReactComponent as Image1 } from "../assets/img/pro-big-1.jpg";
 import { ReactComponent as Image2 } from "../assets/img/pro-big-2.jpg";
 import { ReactComponent as Image3 } from "../assets/img/pro-big-3.jpg";
 
+
+// npm i --save react-redux-toastr
+
 const dataStub = [
 	{
 		id: 102,
@@ -45,20 +48,29 @@ const dataStub = [
 ];
 
 const initialState = {
-	goods: {},
-	cart: dataStub,
-	isSearchOpen: false,
-	favorite: {},
-	categories: [],
-	brands: [],
-	colors: [],
-	ranges: [],
+	goods: {}, //
+	cart: dataStub, // корзина покупок
+	isSearchOpen: false, // флаг, отображает открыт поиск или нет
+	favorite: {}, // хранит понравившиеся товары
+	categories: [], // массив всех категорий
+	brands: [], // все бренды
+	colors: [], // все доступные в каталоге цвета (основные)
+	ranges: [], // диапазон цен.
 	filters: {
-		brand: {},
-		color: {},
-		price: {},
-	}
+		brand: {}, // фильтр по бренду
+		color: {}, // по цвету
+		price: {}, // по цене
+	},
+	isLoading: {}, // объект, характеризующий состояние загрузки данных с бэка, внутри будут ключи для каждого из урлов АПИ
 };
+
+const rootReducer2 = (state = initialState, action) => {
+
+	switch (action.type) {
+		case
+	}
+
+}
 
 const rootReducer = createReducer({
 	[actions.updateFilter]: (state, payload) => ({ ...state, filters: { ...state.filters, ...payload }}),
