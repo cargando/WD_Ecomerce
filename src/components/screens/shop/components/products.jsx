@@ -8,11 +8,14 @@ import { withRouter } from 'react-router';
 // };
 
 const SERVER_URL = 'http://test-api.ipromote.ru/img/';
+const viewOnPageList = [12, 24, 48, 96];
+
 
 function Products(props) {
 	const activeFilters = useSelector(state => state.app.filters || {});
 	const goodsList = useSelector(state => state.app.goods.response || {});
 	const categoryList = useSelector(state => state.app.categories.response || {});
+	const viewOnPage = useSelector(state => state.app.itemsOnPage);
 
 	const { code: activeBrand = ''} = props.match.params;
 
@@ -35,7 +38,7 @@ function Products(props) {
 		return list.filter(item => (brand[item.id] || color[item.id] || price[item.id] || categoryId === item.category))
 	};
 
-	const renderGoods = list => list.map(item => (
+	const renderGoods = list => list.splice(0, viewOnPageList[ viewOnPage ]).map(item => (
 		<div key={ item.id } className="col-12 col-sm-6 col-md-12 col-xl-6">
 			<div className="single-product-wrapper">
 				<div className="product-img">

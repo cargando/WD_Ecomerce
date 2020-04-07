@@ -57,11 +57,29 @@ const initialState = {
 		brand: {},
 		color: {},
 		price: {},
-	}
+	},
+	itemsOnPage: 0,
+	startPage: 0,
 };
+
+const ob = {
+	name: "Иваныч",
+	age: 30,
+	phone: "555-12-12",
+};
+const action = "name";
+
+switch (action) {
+	case "name": // ...
+	case "age": // ...
+	case "phone": // ...
+}
+
+	const result = ob[action]; // -> ob["name"] ->
 
 const rootReducer = createReducer({
 	[actions.updateFilter]: (state, payload) => ({ ...state, filters: { ...state.filters, ...payload }}),
+	[actions.updateItemsOnPage]: (state, payload) => ({ ...state, itemsOnPage: payload }),
 	[actions.updateCategory]: (state, payload) => ({ ...state, categories: payload}),
 	[actions.updateBrands]: (state, payload) => ({ ...state, brands: payload}),
 	[actions.updateRanges]: (state, payload) => ({ ...state, ranges: payload}),

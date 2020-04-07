@@ -1,16 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useRouteMatch } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
-import { updateFilter } from "../../../../store/actions";
+import { updateFilter, updateItemsOnPage } from "../../../../store/actions";
+import DropDown from '../../../../components/dropdown';
 import * as URL from '../../../../router/url';
 
 Header.propTypes = {
-	
+
 };
 
+const sortByList = ['Date', 'Newest', 'Popular'];
+const viewOnPageList = [12, 24, 48, 96];
+
+
 function Header(props) {
+	const [ sortBy, setSortBy ] = useState(0);
+	const viewOnPage = useSelector(state => state.app.itemsOnPage);
+
 	const activeFilters = useSelector(state => state.app.filters || {});
 	let match = useRouteMatch(URL.SHOP_C);
 	const history = useHistory()
@@ -26,8 +33,20 @@ function Header(props) {
 				color: {},
 				price: {},
 			},
-		})
+		});
 		history.push(URL.SHOP);
+	};
+
+	const handleChangeDropDown = (index, name) => {
+		if (name === "sortBy") {
+			setSortBy(index);
+		} else if (name === "viewOnPage") {
+
+			dispatcher({ // обновить данные в редакс - глобал сторадж
+				type: updateItemsOnPage.getType(),
+				payload: index,
+			});
+		}
 	};
 
 
@@ -43,42 +62,24 @@ function Header(props) {
 						</div>
 					</div>
 					<div className="product-sorting d-flex">
-						<div className="sort-by-date d-flex align-items-center mr-15">
-							<p>Sort by</p>
-							<form action="#" method="get">
-								<select name="select" id="sortBydate" style={{display: "none"}}>
-									<option value="value">Date</option>
-									<option value="value">Newest</option>
-									<option value="value">Popular</option>
-								</select>
-								<div className="nice-select" tabIndex="0"><span className="current">Date</span>
-									<ul className="list">
-										<li data-value="value" className="option selected">Date</li>
-										<li data-value="value" className="option">Newest</li>
-										<li data-value="value" className="option">Popular</li>
-									</ul>
-								</div>
-							</form>
-						</div>
-						<div className="view-product d-flex align-items-center">
-							<p>View</p>
-							<form action="#" method="get">
-								<select name="select" id="viewProduct" style={{display: "none"}}>
-									<option value="value">12</option>
-									<option value="value">24</option>
-									<option value="value">48</option>
-									<option value="value">96</option>
-								</select>
-								<div className="nice-select" tabIndex="0"><span className="current">12</span>
-									<ul className="list">
-										<li data-value="value" className="option selected">12</li>
-										<li data-value="value" className="option">24</li>
-										<li data-value="value" className="option">48</li>
-										<li data-value="value" className="option">96</li>
-									</ul>
-								</div>
-							</form>
-						</div>
+
+						<DropDown
+							title="Sort by"
+							name="sortBy"
+							current={ sortBy }
+							options={ sortByList }
+							onChange={ handleChangeDropDown }
+						/>
+
+						<DropDown
+							title="View"
+							name="viewOnPage"
+							current={ viewOnPage }
+							options={ viewOnPageList }
+							onChange={ handleChangeDropDown }
+						/>
+
+
 					</div>
 				</div>
 				{

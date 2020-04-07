@@ -3,6 +3,7 @@ import { createAction } from 'redux-act';
 
 
 export const updateFilter = createAction('updateFilter');
+export const updateItemsOnPage = createAction('updateItemsOnPage');
 export const updateCategory = createAction('updateCategory');
 export const updateBrands = createAction('updateBrands');
 export const updateRanges = createAction('updateRanges');

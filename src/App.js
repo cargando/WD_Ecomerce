@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 import Footer from "./components/footer";
@@ -11,7 +11,18 @@ import NavButtons from "./components/header/buttons";
 import NavCart from "./components/header/cart";
 import NavSochial from "./components/header/soch";
 
+import Fav from './assets/img/favicon.ico';
+
 function App(props) {
+
+	const ref = useRef();
+
+	useEffect(() => {
+		ref.current = document.getElementById('favIcon');
+		ref.current.href = Fav;
+	}, []);
+
+
   return (
 	  <React.Fragment>
 		  <Search />
